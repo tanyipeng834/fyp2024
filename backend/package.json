@@ -3,7 +3,6 @@
     "version": "1.0.0",
     "description": "",
     "main": "index.js",
-    "type": "module",
     "scripts": {
         "test": "jest",
         "start": "lite-server"
@@ -20,7 +19,9 @@
     },
     "dependencies": {
         "@supabase/supabase-js": "^2.44.2",
+        "dotenv": "^16.4.5",
         "express": "^4.19.2",
-        "log4js": "^6.9.1"
+        "log4js": "^6.9.1",
+        "supabase": "^1.183.5"
     }
 }
