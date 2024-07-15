@@ -17,7 +17,13 @@ const accountsdb_1 = require("../accountsdb");
 const accountsRouter = express_1.default.Router();
 accountsRouter.get('/getallaccounts', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const accounts = yield (0, accountsdb_1.getAllAccounts)();
-    res.status(200);
-    res.json(accounts);
+    if (accounts) {
+        res.status(200);
+        res.json(accounts);
+    }
+    else {
+        res.status(500);
+        res.json({ error: "Failed to retrieve accounts" });
+    }
 }));
 exports.default = accountsRouter;
