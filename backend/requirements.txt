@@ -1,3 +1,8 @@
+fastapi
+logging
 openai
+pydantic
+pytest
 python-dotenv
 requests
+typing
