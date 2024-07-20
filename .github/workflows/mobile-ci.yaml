@@ -23,9 +23,9 @@ jobs:
         run: |
           npm install
       - name: Run Tests
-        working-directory: frontend
+        working-directory: frontend/iQMA-Skills-Builder
         run: |
-          npm install
+          npm text
 
       
 
