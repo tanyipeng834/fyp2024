@@ -27,4 +27,5 @@ const express_1 = require("express");
 const accountsController = __importStar(require("../controllers/accountsController"));
 const router = (0, express_1.Router)();
 router.get('/getallaccounts', accountsController.getAllAccounts);
+router.get('/getaccountbyid/:id', accountsController.getAccountById);
 exports.default = router;
