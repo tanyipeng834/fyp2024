@@ -12,7 +12,8 @@ export enum Age {
 
 export enum Gender {
     Male = "Male",
-    Female = "Female"
+    Female = "Female",
+    Other = "Other"
 }
 
 export interface Accounts {
