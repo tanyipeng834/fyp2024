@@ -8,6 +8,8 @@ services:
     - "3000:3000"
     networks:
     - app-network
+    depends_on:
+    - redis
 
   db:
     image: postgres
@@ -33,8 +35,9 @@ services:
     restart: always
     volumes:
     - redis-data:/data
-    depends_on:
-    - backend
+    ports:
+      - 6379:6379
+    
     networks:
     - app-network
   redis-commander:
