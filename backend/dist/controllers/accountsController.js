@@ -32,8 +32,46 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getAccountById = exports.getAllAccounts = void 0;
+exports.deleteAccount = exports.getAllAdminAccounts = exports.getAllLearnerAccounts = exports.getAccountById = exports.getAllAccounts = exports.createAdminAccount = exports.createLearnerAccount = void 0;
 const accountsService = __importStar(require("../services/accountsService"));
+/* CREATE */
+const createLearnerAccount = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const learner = req.body;
+    try {
+        const account = yield accountsService.createLearnerAccount(learner);
+        res.status(201).json({
+            "userid": account[0].userid,
+            "status": 201,
+            "statusText": "Created"
+        });
+    }
+    catch (error) {
+        res.status(500).json({
+            error: "Failed to create Learner account",
+        });
+        console.log(error);
+    }
+});
+exports.createLearnerAccount = createLearnerAccount;
+const createAdminAccount = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const admin = req.body;
+    try {
+        const account = yield accountsService.createAdminAccount(admin);
+        res.status(201).json({
+            "userid": account[0].userid,
+            "status": 201,
+            "statusText": "Created"
+        });
+    }
+    catch (error) {
+        res.status(500).json({
+            error: "Failed to create Admin account",
+        });
+        console.log(error);
+    }
+});
+exports.createAdminAccount = createAdminAccount;
+/* READ */
 const getAllAccounts = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const accounts = yield accountsService.getAllAccounts();
@@ -54,3 +92,42 @@ const getAccountById = (req, res) => __awaiter(void 0, void 0, void 0, function*
     }
 });
 exports.getAccountById = getAccountById;
+const getAllLearnerAccounts = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const accounts = yield accountsService.getAllLearnerAccounts();
+        res.status(200).json(accounts);
+    }
+    catch (error) {
+        res.status(500).json({
+            error: "Failed to retrieve all learner accounts",
+        });
+    }
+});
+exports.getAllLearnerAccounts = getAllLearnerAccounts;
+const getAllAdminAccounts = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const accounts = yield accountsService.getAllAdminAccounts();
+        res.status(200).json(accounts);
+    }
+    catch (error) {
+        res.status(500).json({
+            error: "Failed to retrieve all admin accounts",
+        });
+    }
+});
+exports.getAllAdminAccounts = getAllAdminAccounts;
+/* UPDATE */
+/* DELETE */
+const deleteAccount = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const response = yield accountsService.deleteAccount(Number(req.params.id));
+        res.status(200).json({
+            "status": response.status,
+            "statusText": response.statusText
+        });
+    }
+    catch (error) {
+        res.status(500).json({ error: "Failed to delete account" });
+    }
+});
+exports.deleteAccount = deleteAccount;

@@ -224,6 +224,45 @@ export type Database = {
           },
         ]
       }
+      chat: {
+        Row: {
+          chattext: string
+          courseid: string
+          datecreated: string
+          role: Database["public"]["Enums"]["chat_role"]
+          userid: number
+        }
+        Insert: {
+          chattext: string
+          courseid: string
+          datecreated?: string
+          role: Database["public"]["Enums"]["chat_role"]
+          userid: number
+        }
+        Update: {
+          chattext?: string
+          courseid?: string
+          datecreated?: string
+          role?: Database["public"]["Enums"]["chat_role"]
+          userid?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "chat_courseid_fkey"
+            columns: ["courseid"]
+            isOneToOne: false
+            referencedRelation: "course"
+            referencedColumns: ["courseid"]
+          },
+          {
+            foreignKeyName: "chat_userid_fkey"
+            columns: ["userid"]
+            isOneToOne: false
+            referencedRelation: "accounts"
+            referencedColumns: ["userid"]
+          },
+        ]
+      }
       course: {
         Row: {
           coursedescription: string | null
@@ -256,175 +295,156 @@ export type Database = {
           },
         ]
       }
-      coursemodule: {
+      lesson: {
         Row: {
           courseid: string
+          datecreated: string | null
+          lessondescription: string | null
+          lessonduration: number | null
+          lessonid: string
+          lessonkeytakeaway: string | null
+          lessonname: string
+          lessontext: string | null
+          lessonurl: string | null
           moduleid: string
-          sequence: number
         }
         Insert: {
           courseid: string
+          datecreated?: string | null
+          lessondescription?: string | null
+          lessonduration?: number | null
+          lessonid: string
+          lessonkeytakeaway?: string | null
+          lessonname: string
+          lessontext?: string | null
+          lessonurl?: string | null
           moduleid: string
-          sequence: number
         }
         Update: {
           courseid?: string
+          datecreated?: string | null
+          lessondescription?: string | null
+          lessonduration?: number | null
+          lessonid?: string
+          lessonkeytakeaway?: string | null
+          lessonname?: string
+          lessontext?: string | null
+          lessonurl?: string | null
           moduleid?: string
-          sequence?: number
         }
         Relationships: [
           {
-            foreignKeyName: "coursemodule_courseid_fkey"
-            columns: ["courseid"]
-            isOneToOne: false
-            referencedRelation: "course"
-            referencedColumns: ["courseid"]
-          },
-          {
-            foreignKeyName: "coursemodule_moduleid_fkey"
-            columns: ["moduleid"]
+            foreignKeyName: "lesson_courseid_moduleid_fkey"
+            columns: ["courseid", "moduleid"]
             isOneToOne: false
             referencedRelation: "module"
-            referencedColumns: ["moduleid"]
+            referencedColumns: ["courseid", "moduleid"]
           },
         ]
       }
-      material: {
-        Row: {
-          datecreated: string | null
-          materialdescription: string | null
-          materialduration: number | null
-          materialid: string
-          materialname: string
-          materialtext: string | null
-          materialurl: string | null
-        }
-        Insert: {
-          datecreated?: string | null
-          materialdescription?: string | null
-          materialduration?: number | null
-          materialid: string
-          materialname: string
-          materialtext?: string | null
-          materialurl?: string | null
-        }
-        Update: {
-          datecreated?: string | null
-          materialdescription?: string | null
-          materialduration?: number | null
-          materialid?: string
-          materialname?: string
-          materialtext?: string | null
-          materialurl?: string | null
-        }
-        Relationships: []
-      }
       module: {
         Row: {
+          courseid: string
           datecreated: string | null
           moduledescription: string | null
           moduleid: string
           modulename: string
         }
         Insert: {
+          courseid: string
           datecreated?: string | null
           moduledescription?: string | null
           moduleid: string
           modulename: string
         }
         Update: {
+          courseid?: string
           datecreated?: string | null
           moduledescription?: string | null
           moduleid?: string
           modulename?: string
         }
-        Relationships: []
-      }
-      modulematerial: {
-        Row: {
-          courseid: string
-          materialid: string
-          moduleid: string
-        }
-        Insert: {
-          courseid: string
-          materialid: string
-          moduleid: string
-        }
-        Update: {
-          courseid?: string
-          materialid?: string
-          moduleid?: string
-        }
         Relationships: [
           {
-            foreignKeyName: "modulematerial_courseid_fkey"
+            foreignKeyName: "module_courseid_fkey"
             columns: ["courseid"]
             isOneToOne: false
             referencedRelation: "course"
             referencedColumns: ["courseid"]
-          },
-          {
-            foreignKeyName: "modulematerial_materialid_fkey"
-            columns: ["materialid"]
-            isOneToOne: false
-            referencedRelation: "material"
-            referencedColumns: ["materialid"]
-          },
-          {
-            foreignKeyName: "modulematerial_moduleid_fkey"
-            columns: ["moduleid"]
-            isOneToOne: false
-            referencedRelation: "module"
-            referencedColumns: ["moduleid"]
           },
         ]
       }
       question: {
         Row: {
           answer: string
+          isselfreflection: boolean
           option1: string
           option2: string
           option3: string
           option4: string
           question: string
-          questionid: string
+          questionno: number
+          quizid: number
         }
         Insert: {
           answer: string
+          isselfreflection: boolean
           option1: string
           option2: string
           option3: string
           option4: string
           question: string
-          questionid: string
+          questionno: number
+          quizid: number
         }
         Update: {
           answer?: string
+          isselfreflection?: boolean
           option1?: string
           option2?: string
           option3?: string
           option4?: string
           question?: string
-          questionid?: string
+          questionno?: number
+          quizid?: number
         }
-        Relationships: []
+        Relationships: [
+          {
+            foreignKeyName: "question_quizid_fkey"
+            columns: ["quizid"]
+            isOneToOne: false
+            referencedRelation: "quiz"
+            referencedColumns: ["quizid"]
+          },
+        ]
       }
       quiz: {
         Row: {
           courseid: string
           lastupdated: string | null
-          quizid: Database["public"]["Enums"]["quiz_id_type"]
+          lessonid: string | null
+          moduleid: string | null
+          quizid: number
+          quizname: string
+          quiztype: Database["public"]["Enums"]["quiz_type"]
         }
         Insert: {
           courseid: string
           lastupdated?: string | null
-          quizid: Database["public"]["Enums"]["quiz_id_type"]
+          lessonid?: string | null
+          moduleid?: string | null
+          quizid?: number
+          quizname: string
+          quiztype: Database["public"]["Enums"]["quiz_type"]
         }
         Update: {
           courseid?: string
           lastupdated?: string | null
-          quizid?: Database["public"]["Enums"]["quiz_id_type"]
+          lessonid?: string | null
+          moduleid?: string | null
+          quizid?: number
+          quizname?: string
+          quiztype?: Database["public"]["Enums"]["quiz_type"]
         }
         Relationships: [
           {
@@ -434,94 +454,48 @@ export type Database = {
             referencedRelation: "course"
             referencedColumns: ["courseid"]
           },
-        ]
-      }
-      quizquestion: {
-        Row: {
-          courseid: string
-          questionid: string
-          quizid: Database["public"]["Enums"]["quiz_id_type"]
-          sequence: number
-        }
-        Insert: {
-          courseid: string
-          questionid: string
-          quizid: Database["public"]["Enums"]["quiz_id_type"]
-          sequence: number
-        }
-        Update: {
-          courseid?: string
-          questionid?: string
-          quizid?: Database["public"]["Enums"]["quiz_id_type"]
-          sequence?: number
-        }
-        Relationships: [
           {
-            foreignKeyName: "quizquestion_courseid_fkey"
-            columns: ["courseid"]
+            foreignKeyName: "quiz_courseid_moduleid_fkey"
+            columns: ["courseid", "moduleid"]
             isOneToOne: false
-            referencedRelation: "course"
-            referencedColumns: ["courseid"]
+            referencedRelation: "module"
+            referencedColumns: ["courseid", "moduleid"]
           },
           {
-            foreignKeyName: "quizquestion_questionid_fkey"
-            columns: ["questionid"]
+            foreignKeyName: "quiz_courseid_moduleid_lessonid_fkey"
+            columns: ["courseid", "moduleid", "lessonid"]
             isOneToOne: false
-            referencedRelation: "question"
-            referencedColumns: ["questionid"]
-          },
-          {
-            foreignKeyName: "quizquestion_quizid_fkey"
-            columns: ["quizid"]
-            isOneToOne: false
-            referencedRelation: "quiz"
-            referencedColumns: ["quizid"]
+            referencedRelation: "lesson"
+            referencedColumns: ["courseid", "moduleid", "lessonid"]
           },
         ]
       }
       response: {
         Row: {
-          courseid: string
-          questionid: string
-          quizid: Database["public"]["Enums"]["quiz_id_type"]
+          questionno: number
+          quizid: number
           response: string | null
           userid: number
         }
         Insert: {
-          courseid: string
-          questionid: string
-          quizid: Database["public"]["Enums"]["quiz_id_type"]
+          questionno: number
+          quizid: number
           response?: string | null
           userid: number
         }
         Update: {
-          courseid?: string
-          questionid?: string
-          quizid?: Database["public"]["Enums"]["quiz_id_type"]
+          questionno?: number
+          quizid?: number
           response?: string | null
           userid?: number
         }
         Relationships: [
           {
-            foreignKeyName: "response_courseid_fkey"
-            columns: ["courseid"]
-            isOneToOne: false
-            referencedRelation: "course"
-            referencedColumns: ["courseid"]
-          },
-          {
-            foreignKeyName: "response_questionid_fkey"
-            columns: ["questionid"]
+            foreignKeyName: "response_quizid_questionno_fkey"
+            columns: ["quizid", "questionno"]
             isOneToOne: false
             referencedRelation: "question"
-            referencedColumns: ["questionid"]
-          },
-          {
-            foreignKeyName: "response_quizid_fkey"
-            columns: ["quizid"]
-            isOneToOne: false
-            referencedRelation: "quiz"
-            referencedColumns: ["quizid"]
+            referencedColumns: ["quizid", "questionno"]
           },
           {
             foreignKeyName: "response_userid_fkey"
@@ -534,34 +508,24 @@ export type Database = {
       }
       result: {
         Row: {
-          courseid: string
           datecreated: string | null
-          quizid: Database["public"]["Enums"]["quiz_id_type"]
+          quizid: number
           score: number
           userid: number
         }
         Insert: {
-          courseid: string
           datecreated?: string | null
-          quizid: Database["public"]["Enums"]["quiz_id_type"]
+          quizid: number
           score: number
           userid: number
         }
         Update: {
-          courseid?: string
           datecreated?: string | null
-          quizid?: Database["public"]["Enums"]["quiz_id_type"]
+          quizid?: number
           score?: number
           userid?: number
         }
         Relationships: [
-          {
-            foreignKeyName: "result_courseid_fkey"
-            columns: ["courseid"]
-            isOneToOne: false
-            referencedRelation: "course"
-            referencedColumns: ["courseid"]
-          },
           {
             foreignKeyName: "result_quizid_fkey"
             columns: ["quizid"]
@@ -613,6 +577,7 @@ export type Database = {
         | "Accessibility"
         | "Interest"
       career_stage_type: "Starter" | "Builder" | "Accelerator" | "Expert"
+      chat_role: "system" | "user"
       computer_literacy_type: "Advanced" | "Intermediate" | "Basic" | "None"
       continents:
         | "Africa"
@@ -657,7 +622,7 @@ export type Database = {
         | "Intermediate"
         | "Basic"
         | "None"
-      quiz_id_type: "Mid Term" | "Final"
+      quiz_type: "course" | "module" | "lesson"
       race_type:
         | "Caucasian"
         | "African American"
