@@ -1,5 +1,12 @@
 import supabase from "../config/supabaseConfig";
-import { Admin, Age, Gender, Learner, Role } from "../models/accountsModel";
+import {
+    Accounts,
+    Admin,
+    Age,
+    Gender,
+    Learner,
+    Role,
+} from "../models/accountsModel";
 
 /* CREATE */
 
@@ -133,6 +140,32 @@ export async function getAllAdminAccounts() {
 }
 
 /* UPDATE */
+
+export async function updateAccount(account: Accounts) {
+    const { userId, firstName, lastName, email } = account;
+
+    const updateFields: { [key: string]: any } = {};
+
+    if (firstName) updateFields.firstname = firstName;
+    if (lastName) updateFields.lastname = lastName;
+    if (email) updateFields.email = email;
+
+    if (Object.keys(updateFields).length === 0) {
+        throw new Error("No fields to update");
+    }
+
+    const { status, statusText, error } = await supabase
+        .from("accounts")
+        .update(updateFields)
+        .eq("userid", userId);
+
+    if (error) {
+        console.error(error);
+        throw error;
+    } else {
+        return { status, statusText };
+    }
+}
 
 /* DELETE */
 
