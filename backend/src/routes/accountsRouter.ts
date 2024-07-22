@@ -14,7 +14,7 @@ router.get('/getalllearneraccounts', accountsController.getAllLearnerAccounts);
 router.get('/getalladminaccounts', accountsController.getAllAdminAccounts);
 
 /* UPDATE */
-router.put('/updateaccount', accountsController.updateAccount);
+router.patch('/updateaccount', accountsController.updateAccount);
 
 /* DELETE */
 router.delete('/deleteaccount/:id', accountsController.deleteAccount);
