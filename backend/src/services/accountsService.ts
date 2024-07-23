@@ -11,11 +11,12 @@ import {
 /* CREATE */
 
 export async function createLearnerAccount(learner: Learner) {
-    const { firstName, lastName, email, dateCreated, age, gender } = learner;
+    const { userId, firstName, lastName, email, dateCreated, age, gender } = learner;
 
     const { data, error } = await supabase
         .from("accounts")
         .insert({
+            userid: userId,
             firstname: firstName,
             lastname: lastName,
             email: email,
@@ -35,11 +36,12 @@ export async function createLearnerAccount(learner: Learner) {
 }
 
 export async function createAdminAccount(admin: Admin) {
-    const { firstName, lastName, email, dateCreated, age, gender } = admin;
+    const { userId, firstName, lastName, email, dateCreated, age, gender } = admin;
 
     const { data, error } = await supabase
         .from("accounts")
         .insert({
+            userid: userId,
             firstname: firstName,
             lastname: lastName,
             email: email,
@@ -71,7 +73,7 @@ export async function getAllAccounts() {
     }
 }
 
-export async function getAccountById(userid: number): Promise<Learner> {
+export async function getAccountById(userid: string): Promise<Learner> {
     const { data, error } = await supabase
         .from("accounts")
         .select("*")
@@ -169,7 +171,7 @@ export async function updateAccount(account: Accounts) {
 
 /* DELETE */
 
-export async function deleteAccount(userid: number) {
+export async function deleteAccount(userid: string) {
     const { status, statusText, error } = await supabase
         .from("accounts")
         .delete()

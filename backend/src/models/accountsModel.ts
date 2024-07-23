@@ -17,7 +17,7 @@ export enum Gender {
 }
 
 export interface Accounts {
-    userId: number;
+    userId: string;
     firstName: string;
     lastName: string;
     email: string;
@@ -36,7 +36,7 @@ export interface Accounts {
 }
 
 export class Learner implements Accounts {
-    userId: number;
+    userId: string;
     firstName: string;
     lastName: string;
     email: string;
@@ -46,7 +46,7 @@ export class Learner implements Accounts {
     gender: Gender;
 
     constructor(
-        userId: number,
+        userId: string,
         firstName: string,
         lastName: string,
         email: string,
@@ -95,7 +95,7 @@ export class Learner implements Accounts {
 }
 
 export class Admin implements Accounts {
-    userId: number;
+    userId: string;
     firstName: string;
     lastName: string;
     email: string;
@@ -105,7 +105,7 @@ export class Admin implements Accounts {
     gender: Gender;
 
     constructor(
-        userId: number,
+        userId: string,
         firstName: string,
         lastName: string,
         email: string,

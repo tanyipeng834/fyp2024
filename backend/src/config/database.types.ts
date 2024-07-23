@@ -18,7 +18,7 @@ export type Database = {
           gender: Database["public"]["Enums"]["gender_type"]
           lastname: string
           role: Database["public"]["Enums"]["role"]
-          userid: number
+          userid: string
         }
         Insert: {
           age: Database["public"]["Enums"]["age_type"]
@@ -28,7 +28,7 @@ export type Database = {
           gender: Database["public"]["Enums"]["gender_type"]
           lastname: string
           role: Database["public"]["Enums"]["role"]
-          userid?: number
+          userid: string
         }
         Update: {
           age?: Database["public"]["Enums"]["age_type"]
@@ -38,7 +38,7 @@ export type Database = {
           gender?: Database["public"]["Enums"]["gender_type"]
           lastname?: string
           role?: Database["public"]["Enums"]["role"]
-          userid?: number
+          userid?: string
         }
         Relationships: []
       }
@@ -49,7 +49,7 @@ export type Database = {
           motivationallevel: Database["public"]["Enums"]["motivational_level_type"]
           personality: Database["public"]["Enums"]["personality_type"]
           reasons: Database["public"]["Enums"]["reasons_for_attending_course_type"][]
-          userid: number
+          userid: string
         }
         Insert: {
           attitude: Database["public"]["Enums"]["attitude_towards_learning_type"]
@@ -57,7 +57,7 @@ export type Database = {
           motivationallevel: Database["public"]["Enums"]["motivational_level_type"]
           personality: Database["public"]["Enums"]["personality_type"]
           reasons: Database["public"]["Enums"]["reasons_for_attending_course_type"][]
-          userid: number
+          userid: string
         }
         Update: {
           attitude?: Database["public"]["Enums"]["attitude_towards_learning_type"]
@@ -65,7 +65,7 @@ export type Database = {
           motivationallevel?: Database["public"]["Enums"]["motivational_level_type"]
           personality?: Database["public"]["Enums"]["personality_type"]
           reasons?: Database["public"]["Enums"]["reasons_for_attending_course_type"][]
-          userid?: number
+          userid?: string
         }
         Relationships: [
           {
@@ -84,7 +84,7 @@ export type Database = {
           learningpreferences: Database["public"]["Enums"]["learning_preferences_type"]
           litnumproficiency: Database["public"]["Enums"]["literacy_numeracy_proficiency_type"]
           priorknowledge: Database["public"]["Enums"]["prior_knowledge_skills_type"]
-          userid: number
+          userid: string
         }
         Insert: {
           educationallevel: Database["public"]["Enums"]["educational_level_type"]
@@ -92,7 +92,7 @@ export type Database = {
           learningpreferences: Database["public"]["Enums"]["learning_preferences_type"]
           litnumproficiency: Database["public"]["Enums"]["literacy_numeracy_proficiency_type"]
           priorknowledge: Database["public"]["Enums"]["prior_knowledge_skills_type"]
-          userid: number
+          userid: string
         }
         Update: {
           educationallevel?: Database["public"]["Enums"]["educational_level_type"]
@@ -100,7 +100,7 @@ export type Database = {
           learningpreferences?: Database["public"]["Enums"]["learning_preferences_type"]
           litnumproficiency?: Database["public"]["Enums"]["literacy_numeracy_proficiency_type"]
           priorknowledge?: Database["public"]["Enums"]["prior_knowledge_skills_type"]
-          userid?: number
+          userid?: string
         }
         Relationships: [
           {
@@ -120,7 +120,7 @@ export type Database = {
           lifestage: Database["public"]["Enums"]["life_stage_type"]
           race: Database["public"]["Enums"]["race_type"]
           specialneeds: Database["public"]["Enums"]["special_needs_type"]
-          userid: number
+          userid: string
         }
         Insert: {
           careerstage: Database["public"]["Enums"]["career_stage_type"]
@@ -129,7 +129,7 @@ export type Database = {
           lifestage: Database["public"]["Enums"]["life_stage_type"]
           race: Database["public"]["Enums"]["race_type"]
           specialneeds: Database["public"]["Enums"]["special_needs_type"]
-          userid: number
+          userid: string
         }
         Update: {
           careerstage?: Database["public"]["Enums"]["career_stage_type"]
@@ -138,7 +138,7 @@ export type Database = {
           lifestage?: Database["public"]["Enums"]["life_stage_type"]
           race?: Database["public"]["Enums"]["race_type"]
           specialneeds?: Database["public"]["Enums"]["special_needs_type"]
-          userid?: number
+          userid?: string
         }
         Relationships: [
           {
@@ -156,21 +156,21 @@ export type Database = {
           relationshiptopeers: Database["public"]["Enums"]["relationship_to_peers_type"]
           socialbackground: Database["public"]["Enums"]["social_background_type"]
           tendency: Database["public"]["Enums"]["tendency_to_compete_or_cooperate_type"]
-          userid: number
+          userid: string
         }
         Insert: {
           compliteracy: Database["public"]["Enums"]["computer_literacy_type"]
           relationshiptopeers: Database["public"]["Enums"]["relationship_to_peers_type"]
           socialbackground: Database["public"]["Enums"]["social_background_type"]
           tendency: Database["public"]["Enums"]["tendency_to_compete_or_cooperate_type"]
-          userid: number
+          userid: string
         }
         Update: {
           compliteracy?: Database["public"]["Enums"]["computer_literacy_type"]
           relationshiptopeers?: Database["public"]["Enums"]["relationship_to_peers_type"]
           socialbackground?: Database["public"]["Enums"]["social_background_type"]
           tendency?: Database["public"]["Enums"]["tendency_to_compete_or_cooperate_type"]
-          userid?: number
+          userid?: string
         }
         Relationships: [
           {
@@ -189,7 +189,7 @@ export type Database = {
           courseid: string
           issuedate: string | null
           provider: string
-          userid: number
+          userid: string
         }
         Insert: {
           certificateid?: number
@@ -197,7 +197,7 @@ export type Database = {
           courseid: string
           issuedate?: string | null
           provider: string
-          userid: number
+          userid: string
         }
         Update: {
           certificateid?: number
@@ -205,7 +205,7 @@ export type Database = {
           courseid?: string
           issuedate?: string | null
           provider?: string
-          userid?: number
+          userid?: string
         }
         Relationships: [
           {
@@ -230,21 +230,21 @@ export type Database = {
           courseid: string
           datecreated: string
           role: Database["public"]["Enums"]["chat_role"]
-          userid: number
+          userid: string
         }
         Insert: {
           chattext: string
           courseid: string
           datecreated?: string
           role: Database["public"]["Enums"]["chat_role"]
-          userid: number
+          userid: string
         }
         Update: {
           chattext?: string
           courseid?: string
           datecreated?: string
           role?: Database["public"]["Enums"]["chat_role"]
-          userid?: number
+          userid?: string
         }
         Relationships: [
           {
@@ -475,19 +475,19 @@ export type Database = {
           questionno: number
           quizid: number
           response: string | null
-          userid: number
+          userid: string
         }
         Insert: {
           questionno: number
           quizid: number
           response?: string | null
-          userid: number
+          userid: string
         }
         Update: {
           questionno?: number
           quizid?: number
           response?: string | null
-          userid?: number
+          userid?: string
         }
         Relationships: [
           {
@@ -511,19 +511,19 @@ export type Database = {
           datecreated: string | null
           quizid: number
           score: number
-          userid: number
+          userid: string
         }
         Insert: {
           datecreated?: string | null
           quizid: number
           score: number
-          userid: number
+          userid: string
         }
         Update: {
           datecreated?: string | null
           quizid?: number
           score?: number
-          userid?: number
+          userid?: string
         }
         Relationships: [
           {

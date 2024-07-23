@@ -52,9 +52,7 @@ export const getAllAccounts = async (req: Request, res: Response) => {
 
 export const getAccountById = async (req: Request, res: Response) => {
     try {
-        const account = await accountsService.getAccountById(
-            Number(req.params.id)
-        );
+        const account = await accountsService.getAccountById(req.params.id);
         res.status(200).json(account);
     } catch (error) {
         res.status(500).json({ error: "Failed to retrieve account" });
@@ -92,7 +90,7 @@ export const updateAccount = async (req: Request, res: Response) => {
         const response = await accountsService.updateAccount(account);
         res.status(200).json({
             status: response.status,
-            statusText: response.statusText,
+            statusText: "Account Updated Successfully",
         });
     } catch (error) {
         res.status(500).json({ error: "Failed to update account" });
@@ -103,12 +101,10 @@ export const updateAccount = async (req: Request, res: Response) => {
 
 export const deleteAccount = async (req: Request, res: Response) => {
     try {
-        const response = await accountsService.deleteAccount(
-            Number(req.params.id)
-        );
+        const response = await accountsService.deleteAccount(req.params.id);
         res.status(200).json({
             status: response.status,
-            statusText: response.statusText,
+            statusText: "Account deleted Successfully",
         });
     } catch (error) {
         res.status(500).json({ error: "Failed to delete account" });
