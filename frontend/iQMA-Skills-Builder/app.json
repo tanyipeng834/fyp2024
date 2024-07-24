@@ -2,7 +2,7 @@
   "expo": {
     "name": "iQMA-Skills-Builder",
     "slug": "iQMA-Skills-Builder",
-    "scheme": "com.lifeisaparty.iqmaskillsbuilder",
+    "scheme": "com.iqma.iqmaskillsbuilder",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
@@ -20,7 +20,7 @@
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "package": "com.lifeisaparty.iqmaskillsbuilder"
+      "package": "com.iqma.iqmaskillsbuilder"
     },
     "web": {
       "bundler": "metro",

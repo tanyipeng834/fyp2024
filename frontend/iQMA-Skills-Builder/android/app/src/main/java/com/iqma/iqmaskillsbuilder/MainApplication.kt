@@ -1,4 +1,4 @@
-package com.lifeisaparty.iqmaskillsbuilder
+package com.iqma.iqmaskillsbuilder
 
 import android.app.Application
 import android.content.res.Configuration

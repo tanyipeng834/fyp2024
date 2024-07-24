@@ -1,4 +1,4 @@
-package com.lifeisaparty.iqmaskillsbuilder
+package com.iqma.iqmaskillsbuilder
 
 import android.os.Build
 import android.os.Bundle

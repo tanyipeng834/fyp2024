@@ -83,12 +83,12 @@ android {
     buildToolsVersion rootProject.ext.buildToolsVersion
     compileSdk rootProject.ext.compileSdkVersion
 
-    namespace 'com.lifeisaparty.iqmaskillsbuilder'
+    namespace 'com.iqma.iqmaskillsbuilder'
     defaultConfig {
-// @generated begin react-native-auth0-manifest-placeholder - expo prebuild (DO NOT MODIFY) sync-6c46c8eb85d3c554faff374233a481f0256b1e42
-manifestPlaceholders = [auth0Domain: "dev-doimvjsv85uforrd.us.auth0.com", auth0Scheme: "com.lifeisaparty.iqmaskillsbuilder.auth0"]
+// @generated begin react-native-auth0-manifest-placeholder - expo prebuild (DO NOT MODIFY) sync-9e4b03b1c2d90771677f7cdf0d84e7bcb056ec44
+manifestPlaceholders = [auth0Domain: "dev-doimvjsv85uforrd.us.auth0.com", auth0Scheme: "com.iqma.iqmaskillsbuilder.auth0"]
 // @generated end react-native-auth0-manifest-placeholder
-        applicationId 'com.lifeisaparty.iqmaskillsbuilder'
+        applicationId 'com.iqma.iqmaskillsbuilder'
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
