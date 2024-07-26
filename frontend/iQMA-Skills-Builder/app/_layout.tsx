@@ -7,7 +7,9 @@ export default function RootLayout() {
     return (
         <Auth0Provider domain={config.domain} clientId={config.clientId}>
             <AuthProvider>
-                <Stack>
+                <Stack screenOptions={{
+                    headerTitle: ''
+                }}>
                     <Stack.Screen name="index" />
                 </Stack>
             </AuthProvider>
