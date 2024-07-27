@@ -22,19 +22,39 @@ var __importStar = (this && this.__importStar) || function (mod) {
     __setModuleDefault(result, mod);
     return result;
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = require("express");
 const accountsController = __importStar(require("../controllers/accountsController"));
+const express_oauth2_jwt_bearer_1 = require("express-oauth2-jwt-bearer");
+const dotenv_1 = __importDefault(require("dotenv"));
+dotenv_1.default.config();
 const router = (0, express_1.Router)();
+const checkJwt = (0, express_oauth2_jwt_bearer_1.auth)({
+    audience: process.env.AUDIENCE,
+    issuerBaseURL: process.env.ISSUERBASEURL,
+});
 /* CREATE */
 router.post('/createlearneraccount', accountsController.createLearnerAccount);
 router.post('/createadminaccount', accountsController.createAdminAccount);
 /* READ */
-router.get('/getallaccounts', accountsController.getAllAccounts);
+router.get('/getallaccounts', checkJwt, accountsController.getAllAccounts);
 router.get('/getaccountbyid/:id', accountsController.getAccountById);
 router.get('/getalllearneraccounts', accountsController.getAllLearnerAccounts);
 router.get('/getalladminaccounts', accountsController.getAllAdminAccounts);
 /* UPDATE */
+router.patch('/updateaccount', accountsController.updateAccount);
 /* DELETE */
 router.delete('/deleteaccount/:id', accountsController.deleteAccount);
+// Custom error handler middleware
+function customErrorHandler(err, req, res, next) {
+    if (err && err.status === 401) {
+        return res.status(401).json({ message: 'Unauthorized Access' });
+    }
+    next(err);
+}
+// Use the custom error handler
+router.use(customErrorHandler);
 exports.default = router;
