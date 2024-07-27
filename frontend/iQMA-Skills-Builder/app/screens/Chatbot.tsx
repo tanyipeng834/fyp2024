@@ -20,16 +20,50 @@ type DrawerParamList = {
 // use drawerscreenprops to type the props of chatbot screen
 type ChatbotScreenProps = DrawerScreenProps<DrawerParamList, 'ChatA' | 'ChatB' | 'ChatC' >;
 
+// Insert api call here - getting response from chatbot
+const getChatbotResponse = async (role: string, message: string) => {
+    try {
+        const response = await fetch(`http://10.0.2.2:8000/generate`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ 
+                role: role, 
+                content: message, 
+            }),
+        });
+        const data = await response.json();
+        return data;
+        } catch (error) {
+            console.error('Error:', error);
+        }
+    };
+
 const ChatbotScreen: React.FC<ChatbotScreenProps> = ({ route }) => {
     const {chatId} = route.params;
     const [message, setMessage] = useState('');
     const [messages, setMessages] = useState<{ text: string; isUser: boolean }[]>([
         {text: `Hello! How can I assist you with ${chatId}?`, isUser: false},
     ])
-    const handleSend = () => {
+    const handleSend = async () => {
         setMessages([...messages, {text: message, isUser: true}]);
-        setMessages([...messages, { text: message, isUser: true }, { text: `You said: ${message}`, isUser: false }]);
+        // getChatbotResponse('User', message).then((response) => {
+        //     setMessages([...messages, {text: response.content, isUser: response.role == 'User' ? true : false}]);
+        // });
+        // setMessages([...messages, { text: message, isUser: true }, { text: `You said: ${message}`, isUser: false }]);
         setMessage('');
+
+        const response = await getChatbotResponse('user', message);
+        console.log('Message to send: ', message);
+        console.log('Response from pressing Send: ', response);
+        if (response) {
+            // Add the chatbot response to the chat
+            setMessages((prevMessages) => [
+              ...prevMessages,
+              { text: response.content, isUser: false },
+            ]);
+          }
     };
     
     const conversation = [
