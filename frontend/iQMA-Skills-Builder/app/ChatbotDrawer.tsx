@@ -2,6 +2,7 @@ import { DrawerContentComponentProps, DrawerContentScrollView, DrawerItem, Drawe
 
 import ChatbotScreen from "./screens/Chatbot";
 import React from "react";
+import { StyleSheet } from "react-native";
 
 // defines the drawer routes and params
 type ChatDrawerParamList = {
@@ -20,10 +21,12 @@ const CustomDrawerContent = (props: DrawerContentComponentProps) => {
         <DrawerContentScrollView {...props}>
             <DrawerItemList {...props} />
 
-            {/* <DrawerItem
+            <DrawerItem
                 label="Close drawer"
                 onPress={() => props.navigation.closeDrawer()}
-            /> */}
+                activeTintColor="#8A2BE2"
+                activeBackgroundColor="#8A2BE2"
+            />
         </DrawerContentScrollView>
     );
 }
@@ -38,7 +41,10 @@ const ChatbotDrawer: React.FC<any> = ({navigation}) => (
     //         <Button title="Profile" onPress={() => navigation.navigate('ProfilePage')} />
     //     </View>
     // )}>
-    <Drawer.Navigator
+    <Drawer.Navigator screenOptions={{
+        drawerActiveTintColor: '#8A2BE2',
+        drawerLabelStyle: styles.labelItem,
+      }}
       drawerContent={(props) => <CustomDrawerContent {...props} />}
     >
         {/* need to set initial params or it will be undefined */}
@@ -50,4 +56,11 @@ const ChatbotDrawer: React.FC<any> = ({navigation}) => (
     </Drawer.Navigator>
 );
 
-export default ChatbotDrawer
+
+const styles = StyleSheet.create({
+    labelItem: {
+        padding: 5,
+    }
+});
+
+export default ChatbotDrawer;
