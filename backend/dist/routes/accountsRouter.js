@@ -26,5 +26,15 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = require("express");
 const accountsController = __importStar(require("../controllers/accountsController"));
 const router = (0, express_1.Router)();
+/* CREATE */
+router.post('/createlearneraccount', accountsController.createLearnerAccount);
+router.post('/createadminaccount', accountsController.createAdminAccount);
+/* READ */
 router.get('/getallaccounts', accountsController.getAllAccounts);
+router.get('/getaccountbyid/:id', accountsController.getAccountById);
+router.get('/getalllearneraccounts', accountsController.getAllLearnerAccounts);
+router.get('/getalladminaccounts', accountsController.getAllAdminAccounts);
+/* UPDATE */
+/* DELETE */
+router.delete('/deleteaccount/:id', accountsController.deleteAccount);
 exports.default = router;
