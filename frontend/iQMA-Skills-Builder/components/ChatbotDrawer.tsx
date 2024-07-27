@@ -1,8 +1,9 @@
 import { DrawerContentComponentProps, DrawerContentScrollView, DrawerItem, DrawerItemList, createDrawerNavigator } from "@react-navigation/drawer";
+import { StyleSheet, View } from "react-native";
 
-import ChatbotScreen from "./screens/Chatbot";
+import ChatbotScreen from "../app/screens/Chatbot";
+import HomeScreen from "../app/screens/Home";
 import React from "react";
-import { StyleSheet } from "react-native";
 
 // defines the drawer routes and params
 type ChatDrawerParamList = {
@@ -10,6 +11,7 @@ type ChatDrawerParamList = {
     ChatB: {chatId: string};
     ChatC: {chatId: string};
     ChatD: {chatId: string};
+    Home: undefined;
 }
 
 // to know about the route
@@ -20,13 +22,13 @@ const CustomDrawerContent = (props: DrawerContentComponentProps) => {
     return (
         <DrawerContentScrollView {...props}>
             <DrawerItemList {...props} />
-
-            <DrawerItem
-                label="Close drawer"
+            <View style={styles.bottomDrawerSection}>
+                <DrawerItem
+                label="Return to Chat"
                 onPress={() => props.navigation.closeDrawer()}
-                activeTintColor="#8A2BE2"
-                activeBackgroundColor="#8A2BE2"
-            />
+                style={styles.closeDrawer}
+                />
+            </View>
         </DrawerContentScrollView>
     );
 }
@@ -53,6 +55,7 @@ const ChatbotDrawer: React.FC<any> = ({navigation}) => (
         <Drawer.Screen name="ChatB" component={ChatbotScreen}  initialParams={{ chatId: 'B' }}/>
         <Drawer.Screen name="ChatC" component={ChatbotScreen}  initialParams={{ chatId: 'C' }}/>
 
+        {/* <Drawer.Screen name="Home" component={HomeScreen} /> */}
     </Drawer.Navigator>
 );
 
@@ -60,7 +63,15 @@ const ChatbotDrawer: React.FC<any> = ({navigation}) => (
 const styles = StyleSheet.create({
     labelItem: {
         padding: 5,
-    }
+    },
+    closeDrawer: {
+        // backgroundColor: '#8A2BE2',
+        borderWidth: 1,
+        justifyContent: 'center',
+    },
+    bottomDrawerSection: {
+        marginTop: 200,
+      },
 });
 
 export default ChatbotDrawer;
