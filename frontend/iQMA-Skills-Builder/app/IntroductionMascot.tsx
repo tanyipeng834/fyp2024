@@ -1,6 +1,6 @@
 import { router } from 'expo-router';
 import { Image, View } from "react-native";
-import { TopChatBubble } from "@/components/TopChatBubble";
+import { ChatBubble } from "@/components/ChatBubble";
 import { CustomButton } from "@/components/CustomButton";
 
 export default function LearnerAssessment() {
@@ -17,7 +17,7 @@ export default function LearnerAssessment() {
             }}
         >
             <Image style={{marginBottom: 20}} source={require('@/assets/images/mascot.png')}></Image>
-            <TopChatBubble>Hi there! I'm Dao!</TopChatBubble>
+            <ChatBubble position='top'>Hi there! I'm Dao!</ChatBubble>
             <View style={{
                 position: 'absolute',
                 bottom: 40,

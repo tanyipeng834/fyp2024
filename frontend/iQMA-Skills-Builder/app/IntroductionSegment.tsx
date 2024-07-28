@@ -1,8 +1,13 @@
+import { router } from 'expo-router';
 import { Image, View, Text } from "react-native";
-import { TopChatBubble } from "@/components/TopChatBubble";
+import { ChatBubble } from "@/components/ChatBubble";
 import { CustomButton } from "@/components/CustomButton";
 
 export default function IntroductionSegment() {
+    const handlePress = () => {
+        router.push("LearnerAssessmentDemographics")
+    };
+
     return (
         <View
             style={{
@@ -12,16 +17,14 @@ export default function IntroductionSegment() {
             }}
         >
             <Image style={{marginBottom: 20}} source={require('@/assets/images/mascot.png')}></Image>
-            <TopChatBubble>
+            <ChatBubble position='top'>
                 Help me understand you better with just{'\n'}<Text style={{ fontWeight: 'bold' }}>4 quick segments</Text>!
-            </TopChatBubble>
-            
-            {/* <TopChatBubble message="Help me understand you better with just 4 quick segments!" /> */}
+            </ChatBubble>
             <View style={{
                 position: 'absolute',
                 bottom: 40,
             }}>
-                <CustomButton label="continue" backgroundColor="white"/>
+                <CustomButton label="continue" backgroundColor="white" onPressHandler={handlePress}/>
             </View>
         </View>
     )
