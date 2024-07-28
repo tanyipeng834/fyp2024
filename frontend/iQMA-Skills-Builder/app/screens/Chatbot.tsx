@@ -2,23 +2,21 @@
 
 import {DrawerContentComponentProps, DrawerNavigationProp, DrawerScreenProps} from "@react-navigation/drawer";
 import React, { useState } from 'react';
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
 import { AntDesign } from '@expo/vector-icons';
 import ChatBubble from "@/components/ChatBubble";
-import { ScrollView } from 'react-native';
 import { TextInput } from "react-native-gesture-handler";
-import { createStackNavigator } from 'react-navigation-stack';
 
 type DrawerParamList = {
-    ChatA: { chatId: string };
-    ChatB: { chatId: string };
-    ChatC: { chatId: string };
+    'Decision Making': { chatId: string };
+    'Creative Thinking': { chatId: string };
+    'Problem Solving': { chatId: string };
 };
 
 // ensurees chatbot screen receives correct props
 // use drawerscreenprops to type the props of chatbot screen
-type ChatbotScreenProps = DrawerScreenProps<DrawerParamList, 'ChatA' | 'ChatB' | 'ChatC' >;
+type ChatbotScreenProps = DrawerScreenProps<DrawerParamList, 'Decision Making' | 'Creative Thinking' | 'Problem Solving' >;
 
 // Insert api call here - getting response from chatbot
 const getChatbotResponse = async (role: string, message: string) => {
@@ -95,8 +93,7 @@ const ChatbotScreen: React.FC<ChatbotScreenProps> = ({ route }) => {
                 placeholder="Type your messsage..."
                 onSubmitEditing={handleSend}
                 keyboardType="email-address"/> 
-                <TouchableOpacity onPress={handleSend}>
-                    {/* <Text>Send</Text> */}
+                <TouchableOpacity onPress={handleSend} style={styles.button}>
                     <AntDesign name="upcircle" size={24} color="#8A2BE2" />
                 </TouchableOpacity>
             </View>
@@ -127,6 +124,9 @@ const ChatbotScreen: React.FC<ChatbotScreenProps> = ({ route }) => {
         paddingHorizontal: 10,
         paddingVertical: 5,
         marginRight: 10,
+    },
+    button: {
+        justifyContent: 'center',
     }
 });
 export default ChatbotScreen;
