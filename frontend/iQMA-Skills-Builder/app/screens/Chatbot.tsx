@@ -1,7 +1,8 @@
 // app/Chatbot.tsx
 
-import {DrawerContentComponentProps, DrawerNavigationProp, DrawerScreenProps} from "@react-navigation/drawer";
-import React, { useState } from 'react';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { DrawerScreenProps } from "@react-navigation/drawer";
+import React, { useState, useEffect } from 'react';
 import { ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
 import { AntDesign } from '@expo/vector-icons';
@@ -18,8 +19,12 @@ type DrawerParamList = {
 // use drawerscreenprops to type the props of chatbot screen
 type ChatbotScreenProps = DrawerScreenProps<DrawerParamList, 'Decision Making' | 'Creative Thinking' | 'Problem Solving' >;
 
-// Insert api call here - getting response from chatbot
-const getChatbotResponse = async (role: string, message: string) => {
+// Useful Methods
+
+// Getting response from chatbot
+const getChatbotResponse = async (role: string, 
+    message: string,
+    history?: Array<{role: string, content: string}>) => {
     try {
         const response = await fetch(`http://10.0.2.2:8000/generate`, {
             method: 'POST',
@@ -28,49 +33,103 @@ const getChatbotResponse = async (role: string, message: string) => {
             },
             body: JSON.stringify({ 
                 role: role, 
-                content: message, 
+                content: message,
+                ...(history && { history }),
             }),
         });
         const data = await response.json();
         return data;
         } catch (error) {
-            console.error('Error:', error);
+            console.error('Error while getting chatbot response:', error);
         }
     };
 
+// Save chat history
+const saveChatHistory = async (chatId: string, newMessage: { role: string, content: string}) => {
+    try {
+        // retrieve existing chat history if it exists
+        const existingChatHistory = await AsyncStorage.getItem(chatId);
+        let chatHistory = existingChatHistory ? JSON.parse(existingChatHistory) : [{
+            'role' : `assistant`, 
+            'content' : `Hello! How can I assist you with ${chatId}?`
+        }];
+        // append to chat history
+        chatHistory.push(newMessage);
+        // save chat history to async storage
+        const JsonString = JSON.stringify(chatHistory);
+        await AsyncStorage.setItem(chatId, JsonString);
+    } catch (error) {
+        console.error('Error while saving chat history:', error);
+    }
+};
+
+// Load chat history
+const loadChatHistory = async (chatId: string) => {
+    try {
+        const chatHistory = await AsyncStorage.getItem(chatId);
+        return chatHistory ? JSON.parse(chatHistory) : [{
+            'role' : `assistant`, 
+            'content' : `Hello! How can I assist you with ${chatId}?`
+        }];
+    } catch (error) {
+        console.error('Error while loading chat history:', error);
+    }
+};
+
+// Main Chat component
 const ChatbotScreen: React.FC<ChatbotScreenProps> = ({ route }) => {
     const {chatId} = route.params;
     const [message, setMessage] = useState('');
     const [messages, setMessages] = useState<{ text: string; isUser: boolean }[]>([
         {text: `Hello! How can I assist you with ${chatId}?`, isUser: false},
     ])
-    const handleSend = async () => {
-        setMessages([...messages, {text: message, isUser: true}]);
-        // getChatbotResponse('User', message).then((response) => {
-        //     setMessages([...messages, {text: response.content, isUser: response.role == 'User' ? true : false}]);
-        // });
-        // setMessages([...messages, { text: message, isUser: true }, { text: `You said: ${message}`, isUser: false }]);
-        setMessage('');
 
-        const response = await getChatbotResponse('user', message);
-        console.log('Message to send: ', message);
-        console.log('Response from pressing Send: ', response);
+    // Load chat history
+    useEffect(() => {
+        const loadHistory = async () => {
+            const history = await loadChatHistory(chatId);
+            setMessages(history.map((message: { role: string, content: string }) => ({
+                text: message.content,
+                isUser: message.role === 'user',
+            })));
+        };
+        loadHistory();
+    }, [chatId]);
+
+    // handle user input
+    const handleSend = async () => {
+        const userMessage = { text: message, isUser: true };
+        const newMessages = [...messages, userMessage];
+        setMessages(newMessages);
+        setMessage('');
+        
+        // get past messages
+        const history = newMessages.map((msg) => ({
+            role: msg.isUser ? 'user' : 'assistant',
+            content: msg.text,
+        }));
+
+        const response = await getChatbotResponse('user', message, history);
+        // console.log('Message to send: ', message);
+        // console.log('Response from pressing Send: ', response);
         if (response) {
             // Add the chatbot response to the chat
-            setMessages((prevMessages) => [
-              ...prevMessages,
-              { text: response.content, isUser: false },
-            ]);
+            const botReply = { text: response.content, isUser: false };
+            const updatedMessages = [...newMessages, botReply];
+            setMessages(updatedMessages);
+            // Save the chat history
+            saveChatHistory(chatId, { role: 'user', content: message });
+            saveChatHistory(chatId, { role: 'assistant', content: response.content });
           }
     };
     
-    const conversation = [
-        { text: `Hello! How can I assist you with ${chatId}?`, isUser: false },
-        { text: `I need help with ${chatId}.`, isUser: true },
-        { text: `Sure, what do you need to know about ${chatId}?`, isUser: false },
-        { text: `I want to understand more about its features.`, isUser: true },
-        { text: `Okay, let me explain the features of ${chatId}.`, isUser: false }
-    ];
+    // const conversation = [
+    //     { text: `Hello! How can I assist you with ${chatId}?`, isUser: false },
+    //     { text: `I need help with ${chatId}.`, isUser: true },
+    //     { text: `Sure, what do you need to know about ${chatId}?`, isUser: false },
+    //     { text: `I want to understand more about its features.`, isUser: true },
+    //     { text: `Okay, let me explain the features of ${chatId}.`, isUser: false }
+    // ];
 
     if (!chatId) {
         return (
