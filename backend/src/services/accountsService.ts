@@ -84,20 +84,16 @@ export async function getAccountById(userid: string): Promise<Learner> {
         console.error(error);
         throw error;
     } else {
-        const role: Role = data.role === "admin" ? Role.admin : Role.learner;
-        const age: Age = Age[data.age as keyof typeof Age];
-        const gender: Gender = Gender[data.gender as keyof typeof Gender];
-
         if (data.role === "admin") {
             return new Admin(
                 data.userid,
                 data.firstname,
                 data.lastname,
                 data.email,
-                role,
+                data.role as Role,
                 new Date(data.datecreated!),
-                age,
-                gender
+                data.age as Age,
+                data.gender as Gender
             );
         }
         return new Learner(
@@ -105,10 +101,10 @@ export async function getAccountById(userid: string): Promise<Learner> {
             data.firstname,
             data.lastname,
             data.email,
-            role,
+            data.role as Role,
             new Date(data.datecreated!),
-            age,
-            gender
+            data.age as Age,
+            data.gender as Gender
         );
     }
 }
