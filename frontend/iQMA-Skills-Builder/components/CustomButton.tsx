@@ -33,7 +33,7 @@ const styles = StyleSheet.create({
     button: {
         width: screenWidth * 0.8,
         marginTop: 10,
-        padding: 10,
+        padding: 15,
         borderRadius: 10,
         borderWidth: 2,
         justifyContent: 'center',

@@ -20,7 +20,7 @@ export default function LearnerAssessment() {
             <ChatBubble position='top'>Hi there! I'm Dao!</ChatBubble>
             <View style={{
                 position: 'absolute',
-                bottom: 40,
+                bottom: 25,
             }}>
                 <CustomButton label="continue" backgroundColor="white" onPressHandler={handlePress}/>
             </View>
