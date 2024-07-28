@@ -1,14 +1,14 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 
-export const TopChatBubble = ({ message }: { message: string }) => {
+export const TopChatBubble = ({ children }: { children: ReactNode }) => {
     return (
         <View style={styles.container}>
             <View style={styles.arrowContainer}>
                 <View style={styles.arrow} />
             </View>
             <View style={styles.bubble}>
-                <Text style={styles.text}>{message}</Text>
+                <Text style={styles.text}>{children}</Text>
             </View>
         </View>
     );
@@ -25,7 +25,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#7654F2",
     padding: 20,
     borderRadius: 10,
-    shadowColor: '#000',
+    shadowColor: 'black',
     shadowOffset: { width: 0, height: 4 },
     shadowOpacity: 0.3,
     shadowRadius: 6,
@@ -33,7 +33,9 @@ const styles = StyleSheet.create({
     position: 'relative',
   },
   text: {
-    color: "#fff"
+    color: "white",
+    textAlign: 'center',
+    lineHeight: 20,
   },
   arrowContainer: {
     justifyContent: 'center',

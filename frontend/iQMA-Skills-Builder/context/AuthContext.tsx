@@ -19,7 +19,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
             setCurrentUser(user);
             fetchToken();
             console.log(user);
-            router.push("LearnerAssessment");
+            router.push("IntroductionMascot");
         }
     };
 
