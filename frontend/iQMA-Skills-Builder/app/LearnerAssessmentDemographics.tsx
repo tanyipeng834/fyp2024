@@ -171,8 +171,7 @@ export default function LearnerAssessmentDemographics() {
 
             <View style={{
                 alignSelf: 'center',
-                position: 'absolute',
-                bottom: 25,
+                marginTop: 18
             }}>
                 <CustomButton label="continue" backgroundColor="white" onPressHandler={handlePress}/>
             </View>
