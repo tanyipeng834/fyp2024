@@ -10,30 +10,37 @@ type ChatBubbleProps = {
 const ChatBubble: React.FC<ChatBubbleProps> = ({ text, isUser }) => {
     return (
         <View style={[styles.bubble, isUser ? styles.userBubble : styles.botBubble]}>
-            <Text style={styles.text}>{text}</Text>
+            <Text style={isUser ? styles.userText : styles.botText}>{text}</Text>
         </View>
     );
 };
 
 const styles = StyleSheet.create({
     bubble: {
-        padding: 10,
+        padding: 15,
         borderRadius: 20,
         marginVertical: 5,
         maxWidth: '80%',
+        alignItems: 'center',
     },
     userBubble: {
         alignSelf: 'flex-end',
         backgroundColor: '#8A2BE2',
-        color: '#FFFFFF',
     },
     botBubble: {
         alignSelf: 'flex-start',
         backgroundColor: '#D3CCE3',
+
     },
-    text: {
+    botText: {
         color: '#000',
+        lineHeight: 25,
+
     },
+    userText: {
+        color: '#FFFFFF',
+        lineHeight: 25,
+    }
 });
 
 export default ChatBubble;

@@ -9,7 +9,9 @@ import { useEffect, useState } from "react";
 import { AuthProvider } from "@/context/AuthContext";
 import ChatbotDrawer from "../components/ChatbotDrawer";
 import HomeScreen from "./screens/Home";
+import { Ionicons } from '@expo/vector-icons';
 import LogoHeader from "@/components/LogoHeader";
+import { MaterialIcons } from '@expo/vector-icons';
 import ProfilePage from "./screens/ProfilePage";
 import config from "../config/auth0-configuration";
 import {createBottomTabNavigator} from "@react-navigation/bottom-tabs";
@@ -40,9 +42,15 @@ const AppTabs: React.FC = () => {
       tabBarInactiveTintColor: tabBarOptions.inactiveTintColor,
       tabBarStyle: tabBarOptions.style,
     })}>
-      <Tab.Screen name="screens/Home" component={HomeScreen} options={{ title: 'Home Page',  }}/>
-      <Tab.Screen name="screens/Chatbot" component={ChatbotDrawer} options={{ title: 'Chat With Me' }}/>
-      <Tab.Screen name="screens/ProfilePage" component={ProfilePage} options={{ title: 'Profile' }}/>
+      <Tab.Screen name="screens/Home" component={HomeScreen} options={{ title: 'Home Page', tabBarIcon: ({ color, size }) => (
+        <Ionicons name="home" color={color} size={size} />
+      )}}/>
+      <Tab.Screen name="screens/Chatbot" component={ChatbotDrawer} options={{ title: 'Chat With Me', tabBarIcon: ({ color, size }) => (
+        <Ionicons name="chatbox-ellipses-outline" color={color} size={size} />
+      )}}/>
+      <Tab.Screen name="screens/ProfilePage" component={ProfilePage} options={{ title: 'Profile', tabBarIcon: ({ color, size }) => (
+        <MaterialIcons name="manage-accounts" size={size} color={color} />
+      )}}/>
     </Tab.Navigator>
   );
 }
