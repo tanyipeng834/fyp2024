@@ -89,7 +89,12 @@ const ChatbotScreen: React.FC<ChatbotScreenProps> = ({ route }) => {
                 ))}
             </ScrollView>
             <View style={styles.inputContainer}>
-                <TextInput style={styles.input} value={message} onChangeText={setMessage} placeholder="Type your messsage..."/> 
+                <TextInput style={styles.input} 
+                value={message} 
+                onChangeText={setMessage} 
+                placeholder="Type your messsage..."
+                onSubmitEditing={handleSend}
+                keyboardType="email-address"/> 
                 <TouchableOpacity onPress={handleSend}>
                     {/* <Text>Send</Text> */}
                     <AntDesign name="upcircle" size={24} color="#8A2BE2" />
