@@ -17,7 +17,6 @@ export const createAccount = async (req: Request, res: Response) => {
         res.status(500).json({
             error: `Failed to create ${accountBody.role} account`,
         });
-        console.log(error);
     }
 };
 
@@ -61,7 +60,7 @@ export const updateAccount = async (req: Request, res: Response) => {
     try {
         const response = await accountsService.updateAccount(account);
         res.status(200).json({
-            status: response.status,
+            status: 200,
             statusText: "Account Updated Successfully",
         });
     } catch (error) {
@@ -74,9 +73,10 @@ export const updateAccount = async (req: Request, res: Response) => {
 export const deleteAccount = async (req: Request, res: Response) => {
     try {
         const response = await accountsService.deleteAccount(req.params.id);
+        // response body will be empty
         res.status(200).json({
-            status: response.status,
-            statusText: "Account deleted Successfully",
+            status: 200,
+            statusText: "Account Deleted Successfully",
         });
     } catch (error) {
         res.status(500).json({ error: "Failed to delete account" });

@@ -28,7 +28,6 @@ const accountsController = __importStar(require("../controllers/accountsControll
 const router = (0, express_1.Router)();
 /* CREATE */
 router.post("/createaccount", accountsController.createAccount);
-;
 /* READ */
 router.get('/getallaccounts', accountsController.getAllAccounts);
 router.get('/getaccountbyid/:id', accountsController.getAccountById);

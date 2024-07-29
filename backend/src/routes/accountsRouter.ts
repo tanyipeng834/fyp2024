@@ -4,7 +4,7 @@ import * as accountsController from '../controllers/accountsController';
 const router = Router();
 
 /* CREATE */
-router.post("/createaccount", accountsController.createAccount);;
+router.post("/createaccount", accountsController.createAccount);
 
 /* READ */
 router.get('/getallaccounts', accountsController.getAllAccounts);

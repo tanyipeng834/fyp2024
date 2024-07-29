@@ -49,7 +49,6 @@ const createAccount = (req, res) => __awaiter(void 0, void 0, void 0, function* 
         res.status(500).json({
             error: `Failed to create ${accountBody.role} account`,
         });
-        console.log(error);
     }
 });
 exports.createAccount = createAccount;
@@ -92,7 +91,7 @@ const updateAccount = (req, res) => __awaiter(void 0, void 0, void 0, function* 
     try {
         const response = yield accountsService.updateAccount(account);
         res.status(200).json({
-            status: response.status,
+            status: 200,
             statusText: "Account Updated Successfully",
         });
     }
@@ -105,9 +104,10 @@ exports.updateAccount = updateAccount;
 const deleteAccount = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const response = yield accountsService.deleteAccount(req.params.id);
+        // response body will be empty
         res.status(200).json({
-            status: response.status,
-            statusText: "Account deleted Successfully",
+            status: 200,
+            statusText: "Account Deleted Successfully",
         });
     }
     catch (error) {
