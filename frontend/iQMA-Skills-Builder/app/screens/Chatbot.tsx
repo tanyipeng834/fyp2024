@@ -1,12 +1,12 @@
 // app/Chatbot.tsx
 
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import { DrawerScreenProps } from "@react-navigation/drawer";
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
 import { AntDesign } from '@expo/vector-icons';
-import ChatBubble from "@/components/ChatBubble";
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { ChatBubble } from "@/components/ChatBubble";
+import { DrawerScreenProps } from "@react-navigation/drawer";
 import { TextInput } from "react-native-gesture-handler";
 
 type DrawerParamList = {
@@ -142,7 +142,8 @@ const ChatbotScreen: React.FC<ChatbotScreenProps> = ({ route }) => {
         <View style={styles.container}>
             <ScrollView contentContainerStyle={styles.chatContainer}>
                 {messages.map((msg,index) => (
-                    <ChatBubble key={index} text={msg.text} isUser={msg.isUser} />
+                    // <ChatBubble key={index} text={msg.text} isUser={msg.isUser} />
+                    <ChatBubble position={msg.isUser ? 'right' : 'left'}>{msg.text}</ChatBubble>
                 ))}
             </ScrollView>
             <View style={styles.inputContainer}>
