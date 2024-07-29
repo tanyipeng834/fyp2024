@@ -1,0 +1,33 @@
+name: Run Mobile CI
+
+on:
+  push:
+    branches:
+      - develop
+    paths:
+      - "frontend/**"
+  pull_request:
+    branches:
+      - develop
+    paths:
+      - "frontend/**"
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository in Virtual Machine
+        uses: actions/checkout@v2
+      - name: Install Dependecies
+        working-directory: frontend/iQMA-Skills-Builder
+        run: |
+          npm install
+      - name: Run Tests
+        working-directory: frontend/iQMA-Skills-Builder
+        run: |
+          npm test
+
+      
+
+  
+      
