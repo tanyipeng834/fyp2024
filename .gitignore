@@ -9,3 +9,4 @@ venv
 .env
 android
 coverage
+__pycache__
