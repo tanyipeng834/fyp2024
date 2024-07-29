@@ -4,9 +4,9 @@
     "description": "",
     "main": "app.js",
     "scripts": {
-        "test": "jest",
+        "test": "jest --coverage",
         "build": "npx tsc",
-        "start": "node dist/app.js",
+        "start": "npx tsc && node dist/app.js",
         "dev": "nodemon src/app.ts"
     },
     "keywords": [],
