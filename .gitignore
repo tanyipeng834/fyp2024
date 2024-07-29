@@ -5,6 +5,7 @@ backend/.env
 frontend/.env
 frontend/package-lock.json
 backend/package-lock.json
+venv
 .env
 android
 coverage
