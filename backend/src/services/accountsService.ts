@@ -10,8 +10,8 @@ import {
 
 /* CREATE */
 
-export async function createLearnerAccount(learner: Learner) {
-    const { userId, firstName, lastName, email, dateCreated, age, gender } = learner;
+export async function createAccount(account: Accounts) {
+    const { userId, firstName, lastName, email, role, age, gender } = account;
 
     const { data, error } = await supabase
         .from("accounts")
@@ -20,33 +20,7 @@ export async function createLearnerAccount(learner: Learner) {
             firstname: firstName,
             lastname: lastName,
             email: email,
-            role: Role.learner,
-            dateCreated: dateCreated,
-            age: age,
-            gender: gender,
-        })
-        .select();
-
-    if (error) {
-        console.error(error);
-        throw error;
-    } else {
-        return data;
-    }
-}
-
-export async function createAdminAccount(admin: Admin) {
-    const { userId, firstName, lastName, email, dateCreated, age, gender } = admin;
-
-    const { data, error } = await supabase
-        .from("accounts")
-        .insert({
-            userid: userId,
-            firstname: firstName,
-            lastname: lastName,
-            email: email,
-            role: Role.admin,
-            dateCreated: dateCreated,
+            role: role,
             age: age,
             gender: gender,
         })
@@ -109,25 +83,11 @@ export async function getAccountById(userid: string): Promise<Learner> {
     }
 }
 
-export async function getAllLearnerAccounts() {
+export async function getAccountsByRole(role: string) {
     const { data, error } = await supabase
         .from("accounts")
         .select("*")
-        .eq("role", "learner");
-
-    if (error) {
-        console.error(error);
-        throw error;
-    } else {
-        return data;
-    }
-}
-
-export async function getAllAdminAccounts() {
-    const { data, error } = await supabase
-        .from("accounts")
-        .select("*")
-        .eq("role", "admin");
+        .eq("role", role);
 
     if (error) {
         console.error(error);
