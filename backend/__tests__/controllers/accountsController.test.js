@@ -5,6 +5,11 @@ const express = require("express");
 const accountsController = require("../../dist/controllers/accountsController");
 const accountsService = require("../../dist/services/accountsService");
 const accountsRouter = require("../../dist/routes/accountsRouter").default;
+const supabase = require("../../dist/config/supabaseConfig");
+
+jest.mock("../../dist/config/supabaseConfig", () => ({
+    from: jest.fn(),
+}));
 
 jest.mock("../../dist/services/accountsService");
 
