@@ -46,7 +46,7 @@ export default function LearnerAssessmentDemographics() {
             <View style={{ marginTop: 20 }}>
                 <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                     <Text style={[styles.text, { flex: 1 }]}>Age</Text>
-                    <View style={{ flex: 3, borderWidth: 1, borderColor: '#9CA3AF', borderRadius: 10 }}>
+                    <View style={{ flex: 2.5, borderWidth: 1, borderColor: '#9CA3AF', borderRadius: 10 }}>
                         <Picker
                             selectedValue={selectedAge}
                             onValueChange={(itemValue: string) => setAge(itemValue)}
@@ -61,7 +61,7 @@ export default function LearnerAssessmentDemographics() {
 
                 <View style={{ flexDirection: 'row', alignItems: 'center', marginTop: 12 }}>
                     <Text style={[styles.text, { flex: 1 }]}>Gender</Text>
-                    <View style={{ flex: 3, borderWidth: 1, borderColor: '#9CA3AF', borderRadius: 10 }}>
+                    <View style={{ flex: 2.5, borderWidth: 1, borderColor: '#9CA3AF', borderRadius: 10 }}>
                         <Picker
                             selectedValue={selectedGender}
                             onValueChange={(itemValue: string) => setGender(itemValue)}
@@ -76,7 +76,7 @@ export default function LearnerAssessmentDemographics() {
 
                 <View style={{ flexDirection: 'row', alignItems: 'center', marginTop: 12 }}>
                     <Text style={[styles.text, { flex: 1 }]}>Race</Text>
-                    <View style={{ flex: 3, borderWidth: 1, borderColor: '#9CA3AF', borderRadius: 10 }}>
+                    <View style={{ flex: 2.5, borderWidth: 1, borderColor: '#9CA3AF', borderRadius: 10 }}>
                         <Picker
                             selectedValue={selectedRace}
                             onValueChange={(itemValue: string) => setRace(itemValue)}
@@ -90,10 +90,10 @@ export default function LearnerAssessmentDemographics() {
                 </View>
 
                 <View style={{ flexDirection: 'row', alignItems: 'center', marginTop: 12 }}>
-                    <Text style={[styles.text, { flex: 1 }]}>Ethnic Group</Text>
+                    <Text style={[styles.text, { flex: 1 }]}>Ethnic{'\n'}Group</Text>
                     <TextInput
                         style={{ 
-                            flex: 3, 
+                            flex: 2.3, 
                             borderWidth: 1,
                             borderColor: '#9CA3AF',
                             borderRadius: 10,
@@ -109,8 +109,8 @@ export default function LearnerAssessmentDemographics() {
                 </View>
 
                 <View style={{ flexDirection: 'row', alignItems: 'center', marginTop: 12 }}>
-                    <Text style={[styles.text, { flex: 1 }]}>Job Category</Text>
-                    <View style={{ flex: 3, borderWidth: 1, borderColor: '#9CA3AF', borderRadius: 10 }}>
+                    <Text style={[styles.text, { flex: 1 }]}>Job{'\n'}Category</Text>
+                    <View style={{ flex: 2.5, borderWidth: 1, borderColor: '#9CA3AF', borderRadius: 10 }}>
                         <Picker
                             selectedValue={selectedJob}
                             onValueChange={(itemValue: string) => setJob(itemValue)}
@@ -124,8 +124,8 @@ export default function LearnerAssessmentDemographics() {
                 </View>
 
                 <View style={{ flexDirection: 'row', alignItems: 'center', marginTop: 12 }}>
-                    <Text style={[styles.text, { flex: 1 }]}>Life Stage</Text>
-                    <View style={{ flex: 3, borderWidth: 1, borderColor: '#9CA3AF', borderRadius: 10 }}>
+                    <Text style={[styles.text, { flex: 1 }]}>Life{'\n'}Stage</Text>
+                    <View style={{ flex: 2.5, borderWidth: 1, borderColor: '#9CA3AF', borderRadius: 10 }}>
                         <Picker
                             selectedValue={selectedLife}
                             onValueChange={(itemValue: string) => setLife(itemValue)}
@@ -139,8 +139,8 @@ export default function LearnerAssessmentDemographics() {
                 </View>
 
                 <View style={{ flexDirection: 'row', alignItems: 'center', marginTop: 12 }}>
-                    <Text style={[styles.text, { flex: 1 }]}>Career Stage</Text>
-                    <View style={{ flex: 3, borderWidth: 1, borderColor: '#9CA3AF', borderRadius: 10 }}>
+                    <Text style={[styles.text, { flex: 1 }]}>Career{'\n'}Stage</Text>
+                    <View style={{ flex: 2.5, borderWidth: 1, borderColor: '#9CA3AF', borderRadius: 10 }}>
                         <Picker
                             selectedValue={selectedCareer}
                             onValueChange={(itemValue: string) => setCareer(itemValue)}
@@ -154,8 +154,8 @@ export default function LearnerAssessmentDemographics() {
                 </View>
 
                 <View style={{ flexDirection: 'row', alignItems: 'center', marginTop: 12 }}>
-                    <Text style={[styles.text, { flex: 1 }]}>Special Needs</Text>
-                    <View style={{ flex: 3, borderWidth: 1, borderColor: '#9CA3AF', borderRadius: 10 }}>
+                    <Text style={[styles.text, { flex: 1 }]}>Special{'\n'}Needs</Text>
+                    <View style={{ flex: 2.5, borderWidth: 1, borderColor: '#9CA3AF', borderRadius: 10 }}>
                         <Picker
                             selectedValue={selectedNeed}
                             onValueChange={(itemValue: string) => setNeed(itemValue)}
@@ -171,7 +171,7 @@ export default function LearnerAssessmentDemographics() {
 
             <View style={{
                 alignSelf: 'center',
-                marginTop: 18
+                marginTop: 10
             }}>
                 <CustomButton label="continue" backgroundColor="white" onPressHandler={handlePress}/>
             </View>
@@ -184,6 +184,7 @@ const styles = StyleSheet.create({
         textTransform: 'uppercase',
         fontWeight: 'bold',
         color: '#7654F2',
+        lineHeight: 20,
     },
     defaultOptionText: {
         color: '#5C5776'

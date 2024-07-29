@@ -18,6 +18,10 @@ export default function RootLayout() {
                         name="LearnerAssessmentDemographics" 
                         options={{ headerTitle: () => <Header imageName="progress-bar-1" /> }}
                     />
+                    <Stack.Screen
+                        name='LearnerAssessmentCognitive'
+                        options={{ headerTitle: () => <Header imageName="progress-bar-2" /> }}
+                    />
                 </Stack>
             </AuthProvider>
         </Auth0Provider>
@@ -26,6 +30,7 @@ export default function RootLayout() {
 
 const images: { [key: string]: ImageSourcePropType } = {
     'progress-bar-1': require('@/assets/images/progress-bar-1.png'),
+    'progress-bar-2': require('@/assets/images/progress-bar-2.png')
 };
 
 const Header = ({ imageName } : { imageName: string }) => (

@@ -51,7 +51,7 @@ const styles = StyleSheet.create({
         marginBottom: 20,
     },
     bubble: {
-        // maxWidth: '80%',
+        maxWidth: '80%',
         position: 'relative',
         backgroundColor: "#7654F2",
         padding: 20,
